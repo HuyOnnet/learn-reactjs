@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Box, Typography } from '@mui/material';
 import { useState } from 'react';
 import categoryApi from 'api/categoryApi';
-import { ThemeProvider, makeStyles } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
 
 FilterByCategory.propTypes = {
     onChange: PropTypes.func,

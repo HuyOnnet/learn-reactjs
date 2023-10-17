@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Box } from '@mui/material';
 import FilterByCategory from './Filters/FilterByCategory';
+import FilterByPrice from './Filters/FilterByPrice';
 
 ProductFilters.propTypes = {
     filters: PropTypes.object.isRequired,
@@ -19,9 +20,14 @@ function ProductFilters({ filters, onChange }) {
         onChange(newFilters);
     };
 
+    const handlePriceChange = (values) => {
+        if (onChange) onChange(values);
+    };
+
     return (
         <Box>
             <FilterByCategory onChange={handleCategoryChange}></FilterByCategory>
+            <FilterByPrice onChange={handlePriceChange}></FilterByPrice>
         </Box>
     );
 }
