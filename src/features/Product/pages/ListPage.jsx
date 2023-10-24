@@ -8,6 +8,7 @@ import ProductList from '../components/ProductList';
 import Pagination from '@mui/material/Pagination';
 import ProductSort from '../components/ProductSort';
 import ProductFilters from '../components/ProductFilters';
+import PaginationCustom from '../components/PaginationCustom';
 
 ListPage.propTypes = {
 };
@@ -28,7 +29,7 @@ const useStyles = makeStyles(theme => ({
         justifyContent: 'center',
         marginTop: '30px',
         paddingBottom: '20px'
-    }
+    } 
 }))
 
 function ListPage(props) {
@@ -83,6 +84,14 @@ function ListPage(props) {
         }));
     };
 
+    // Hàm set lại số page
+    const setPages = (pageNumber) => {
+        setFilters((prevFilters) => ({
+            ...prevFilters,
+            _page: pageNumber,
+        }));
+     };
+
     return (
         <Box>
             <Container>
@@ -97,12 +106,13 @@ function ListPage(props) {
                         <Paper>
                             {loading ? <ProductSkeletonList /> : <ProductList data={productList} /> }
                             <Box className={classes.pagination}>
-                                <Pagination 
+                            <PaginationCustom setPages={setPages} className={classes.pagination} paginations={pagination}></PaginationCustom>
+                                {/* <Pagination 
                                     count={Math.ceil(pagination.total / pagination.limit)} 
                                     color="primary"
                                     page={pagination.page}
                                     onChange={handlePageChange} 
-                                />
+                                /> */}
                             </Box>
                         </Paper>
                     </Grid>

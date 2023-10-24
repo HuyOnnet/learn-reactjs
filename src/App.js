@@ -31,6 +31,7 @@ function App() {
                 {/* <Route path='/' component={CounterFeature} /> */}
                 {/* <Route path='/todos' component={TodoFeature} /> */}
                 {/* <Route path='/albums' component={AlbumFeature} /> */}
+                <Route path="/" component={ProductFeature} />
                 <Route path="/products" component={ProductFeature} />
                 {/* <Route component={NotFound} /> */}
             </Switch>
