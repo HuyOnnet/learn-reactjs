@@ -22,8 +22,6 @@ function SchoolList({ data }) {
             } catch (error) {
                 console.log('Failed to fetch school list: ', error);
             }
-
-            // setLoading(false);
         })();
     }, [filters]);
 

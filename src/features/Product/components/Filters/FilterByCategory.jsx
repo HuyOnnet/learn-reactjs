@@ -9,9 +9,9 @@ FilterByCategory.propTypes = {
     onChange: PropTypes.func,
 };
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     root: {
-        padding: "16px",
+        padding: '16px',
     },
 
     menu: {
@@ -23,11 +23,11 @@ const useStyles = makeStyles(theme => ({
             marginTop: '8px',
 
             '&:hover': {
-                color: "#1565c0",
-                cursor: 'pointer'
+                color: '#1565c0',
+                cursor: 'pointer',
             },
         },
-    }
+    },
 }));
 
 function FilterByCategory({ onChange }) {
@@ -38,11 +38,12 @@ function FilterByCategory({ onChange }) {
         (async () => {
             try {
                 const list = await categoryApi.getAll();
-                // console.log(list);
-                setCategoryList(list.map(x => ({
-                    id: x.id, 
-                    name: x.name
-                })));
+                setCategoryList(
+                    list.map((x) => ({
+                        id: x.id,
+                        name: x.name,
+                    })),
+                );
             } catch (error) {
                 console.log('Failed to fetch category list: ', error);
             }
@@ -50,20 +51,18 @@ function FilterByCategory({ onChange }) {
     }, []);
 
     const handleCategoryClick = (category) => {
-        if (onChange){
-            onChange(category.id)
+        if (onChange) {
+            onChange(category.id);
         }
     };
 
     return (
         <Box className={classes.root}>
-            <Typography variant='subtitle2'>DANH MỤC SẢN PHẨM</Typography>
+            <Typography variant="subtitle2">DANH MỤC SẢN PHẨM</Typography>
             <ul className={classes.menu}>
                 {categoryList.map((category) => (
                     <li key={category.id} onClick={() => handleCategoryClick(category)}>
-                        <Typography variant='body2'>
-                            {category.name}
-                        </Typography>
+                        <Typography variant="body2">{category.name}</Typography>
                     </li>
                 ))}
             </ul>
