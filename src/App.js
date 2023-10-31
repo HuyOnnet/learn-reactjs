@@ -8,6 +8,7 @@ import productApi from './api/productApi';
 import React from 'react';
 import CounterFeature from './features/Counter';
 import ProductFeature from 'features/Product';
+import SchoolList from 'features/Product/components/SchoolList';
 
 function App() {
     // useEffect(() => {
@@ -31,8 +32,9 @@ function App() {
                 {/* <Route path='/' component={CounterFeature} /> */}
                 {/* <Route path='/todos' component={TodoFeature} /> */}
                 {/* <Route path='/albums' component={AlbumFeature} /> */}
-                <Route path="/" component={ProductFeature} />
-                <Route path="/products" component={ProductFeature} />
+                <Route path="/" component={ProductFeature} exact />
+                <Route path="/products" component={ProductFeature} exact />
+                <Route path="/schools" component={SchoolList} exact />
                 {/* <Route component={NotFound} /> */}
             </Switch>
             {/* Footer */}

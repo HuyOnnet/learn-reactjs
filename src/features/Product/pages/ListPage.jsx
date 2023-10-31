@@ -9,6 +9,8 @@ import Pagination from '@mui/material/Pagination';
 import ProductSort from '../components/ProductSort';
 import ProductFilters from '../components/ProductFilters';
 import PaginationCustom from '../components/PaginationCustom';
+import SchoolList from '../components/SchoolList';
+import schoolApi from 'api/schoolApi';
 
 ListPage.propTypes = {
 };
@@ -35,6 +37,7 @@ const useStyles = makeStyles(theme => ({
 function ListPage(props) {
     const classes = useStyles();
     const [productList, setProductList] = useState([]);
+    const [schoolList, setSchoolList] = useState([]);
     const [pagination, setPagination] = useState({
         limit: 8,
         total: 8, 
@@ -46,6 +49,10 @@ function ListPage(props) {
         _limit: 8,
         _sort: 'salePrice:ASC'
     });
+    const [filterSchool, setFilterSchool] = useState({
+        page: 1,
+        limit: 10,
+    });
 
     useEffect(() => {
         (async () => {
@@ -54,16 +61,25 @@ function ListPage(props) {
                 setProductList(data);
                 setPagination(pagination);
                 // console.log({ data, pagination });
+                // School
+                // console.log(filterSchool);
+                // const { dataSchool } = await schoolApi.getAll( filterSchool );
+                // console.log('Data School', dataSchool);
+                // setSchoolList(dataSchool);
+                const { data2 } = await schoolApi.getAll( filterSchool );
+                // setProductList(data);
+                // setPagination(pagination);
+                console.log({ data2 });
             } catch (error) {
                 console.log('Failed to fetch product list: ', error);
             }
             
             setLoading(false);
         })();
-    }, [filters]);
+    }, [filters, filterSchool]);
 
     const handlePageChange = (e, page) => {
-        console.log(page);
+        // console.log(page);
         setFilters((prevFilters) => ({
             ...prevFilters,
             _page: page,
@@ -105,6 +121,7 @@ function ListPage(props) {
                         <ProductSort currentSort={filters._sort.toString()} onChange={handleSortChange}></ProductSort>
                         <Paper>
                             {loading ? <ProductSkeletonList /> : <ProductList data={productList} /> }
+                            <SchoolList></SchoolList>
                             <Box className={classes.pagination}>
                             <PaginationCustom setPages={setPages} className={classes.pagination} paginations={pagination}></PaginationCustom>
                                 {/* <Pagination 
